@@ -1,0 +1,19 @@
+worldborder add %s
+
+worldborder add %s %s
+
+worldborder damage amount %s
+
+worldborder center %s
+
+worldborder damage buffer %s
+
+worldborder get
+
+worldborder set %s
+
+worldborder set %s %s
+
+worldborder warning distance %s
+
+worldborder warning time %s

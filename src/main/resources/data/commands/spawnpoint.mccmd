@@ -1,0 +1,5 @@
+spawnpoint %s
+
+spawnpoint %s %s
+
+spawnpoint %s %s %s

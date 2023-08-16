@@ -1,0 +1,86 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+String ver = "1.0"
+group 'com.imer1c'
+
+String world = "New World (2)"
+String id = "test-datapack"
+
+sourceSets {
+    api
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(sourceSets.api.output)
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.apache.commons:commons-text:1.10.0'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.19.0'
+    implementation 'com.google.code.gson:gson:2.10'
+    implementation 'org.jetbrains:annotations:20.1.0'
+}
+
+tasks.register('jarTest', Jar) {
+    from(sourceSets.test.output)
+    baseName "test"
+}
+
+tasks.register('deleteNormalFile', Delete) {
+    delete(files("$buildDir/libs/JavaPack.jar"))
+}
+
+tasks.register('compileDatapack', JavaExec) {
+    dependsOn jarTest
+    dependsOn(build)
+    dependsOn(deleteNormalFile)
+    classpath = files("$buildDir/libs/JavaPack-${ver}.jar")
+    workingDir("$buildDir/libs")
+    args("test")
+}
+
+tasks.register('deleteCompiler', Delete) {
+    dependsOn compileDatapack
+    delete files("$buildDir/libs/JavaPack-${ver}.jar")
+}
+
+tasks.register('zipDataPack', Zip) {
+    dependsOn deleteCompiler
+    mkdir(file("$buildDir/libs/out"))
+    from files("$buildDir/libs/out").files.toArray()[0].listFiles()
+    destinationDir(file("$buildDir/libs"))
+    archiveName("${id}.zip")
+}
+
+tasks.register('runTest', Copy) {
+    dependsOn zipDataPack
+    from "$buildDir/libs/${id}.zip"
+    into "${System.getenv("APPDATA")}/.minecraft/saves/$world/datapacks"
+}
+
+tasks.register('apiJar', Jar) {
+    baseName "JavaPack-api-$ver"
+    from(sourceSets.api.output)
+}
+
+build {
+    dependsOn(shadowJar)
+}
+
+shadowJar {
+    archiveClassifier.set("")
+    dependsOn(apiJar)
+    from sourceSets.api.output
+    baseName "JavaPack-$ver"
+    manifest {
+        attributes 'Main-Class': 'com.imer1c.Main'
+    }
+}

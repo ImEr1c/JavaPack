@@ -1,0 +1,16 @@
+bossbar add %s %s
+
+bossbar remove %s
+
+bossbar get %s max
+bossbar get %s players
+bossbar get %s value
+bossbar get %s visible
+
+bossbar set %s color %s
+bossbar set %s max %s
+bossbar set %s name %s
+bossbar set %s players %s
+bossbar set %s style %s
+bossbar set %s value %s
+bossbar set %s visible %s

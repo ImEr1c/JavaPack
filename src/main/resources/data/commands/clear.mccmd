@@ -1,0 +1,9 @@
+
+// Target
+clear %s
+
+// Target and items
+clear %s %s
+
+// Target, items and count
+clear %s %s %s

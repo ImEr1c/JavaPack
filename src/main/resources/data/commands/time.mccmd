@@ -1,0 +1,6 @@
+time add %s
+
+time query %s
+
+time set %s
+time set %s

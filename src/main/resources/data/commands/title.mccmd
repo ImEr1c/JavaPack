@@ -1,0 +1,11 @@
+//clear and reset
+title %s clear
+title %s reset
+
+//title options
+title %s title %s
+title %s actionbar %s
+title %s subtitle %s
+
+//1 - fade in time, 2 - stay time, 3 - fade out time
+title %s times %s %s %s

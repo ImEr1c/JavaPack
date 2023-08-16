@@ -1,0 +1,13 @@
+damage %s %s
+
+// damage with damage type
+damage %s %s %s
+
+// damage at location
+damage %s %s %s at %s
+
+// damage by entity
+damage %s %s %s by %s
+
+// damage by entity with cause
+damage %s %s %s by %s from %s

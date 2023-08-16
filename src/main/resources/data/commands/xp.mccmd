@@ -1,0 +1,8 @@
+xp add %s %s points
+xp add %s %s levels
+
+xp set %s %s points
+xp set %s %s levels
+
+xp query %s points
+xp query %s levels

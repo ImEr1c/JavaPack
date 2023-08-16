@@ -1,0 +1,14 @@
+forceload add %s
+
+forceload add %s %s
+
+forceload remove %s
+forceload remove %s %s
+
+forceload remove all
+
+// count all forceloaded chunks in the world
+forceload query
+
+// is chunk marked
+forceload query %s
