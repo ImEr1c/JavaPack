@@ -1,0 +1,35 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'java'
+}
+
+group = 'com.imer1c'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'commons-io:commons-io:2.11.0'
+}
+
+shadowJar {
+    archiveClassifier.set("")
+
+    manifest {
+        attributes 'Main-Class': 'com.imer1c.Main'
+    }
+}
+
+task jarTest(type: Jar, dependsOn: shadowJar) {
+    archiveFileName = 'test.jar'
+    from sourceSets.test.output
+}
+
+task runTest(type: JavaExec, dependsOn: jarTest) {
+    classpath = files("build/libs/JavaPack-${version}.jar")
+    workingDir("build/libs")
+    args("test.jar")
+}
