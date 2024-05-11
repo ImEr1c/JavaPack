@@ -1,7 +1,6 @@
 package com.imer1c;
 
-import com.imer1c.api.exceptions.DataPackException;
-import com.imer1c.generator.DataPackCompiler;
+import com.imer1c.generator.DataPackCreator;
 
 import java.io.File;
 
@@ -16,6 +15,6 @@ public class Main {
         String filePath = args[0];
         File file = new File(filePath);
 
-
+        DataPackCreator.init(file);
     }
 }
